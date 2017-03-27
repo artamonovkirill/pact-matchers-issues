@@ -15,8 +15,8 @@ class ConsumerSpec extends Specification {
     @SuppressWarnings('GrUnresolvedAccess')
     'Generate pact'() {
         given:
-        def rulesService = new PactBuilder()
-        rulesService {
+        def provider = new PactBuilder()
+        provider {
             serviceConsumer 'Consumer'
             hasPactWith 'Provider'
             port 9000
@@ -35,7 +35,7 @@ class ConsumerSpec extends Specification {
         }
 
         when:
-        def result = rulesService.run() {
+        def result = provider.run() {
             given:
             def client = new RESTClient('http://localhost:9000/')
 
