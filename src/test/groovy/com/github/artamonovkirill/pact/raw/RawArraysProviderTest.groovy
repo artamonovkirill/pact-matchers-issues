@@ -37,9 +37,8 @@ class RawArraysProviderTest {
                 .withStatus(200)
                 .withHeader('Content-Type', 'application/json')
                 .withBody('''{
-                                    "rawArray": [],
-                                    "rawArrayEqTo": [],
-                                    "regexpRawArray": []
+                                    "eachLkEqTo": [""],
+                                    "eachLkRgxp": [""]
                                   }''')))
     }
 

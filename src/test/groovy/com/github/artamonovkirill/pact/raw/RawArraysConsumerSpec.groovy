@@ -25,9 +25,8 @@ class RawArraysConsumerSpec extends Specification {
                     path: PATH)
             willRespondWith(status: 200)
             withBody {
-                rawArray eachLike(1, '1')
-                rawArrayEqTo eachLike(1, equalTo('1'))
-                regexpRawArray eachLike(1, regexp(~/.+/, '1'))
+                eachLkEqTo eachLike(1, equalTo('1'))
+                eachLkRgxp eachLike(1, regexp(~/.+/, '1'))
             }
         }
 
@@ -43,9 +42,8 @@ class RawArraysConsumerSpec extends Specification {
             with(response) {
                 status == 200
                 data == [
-                        rawArray      : ['1'],
-                        rawArrayEqTo  : ['1'],
-                        regexpRawArray: ['1']]
+                        eachLkEqTo: ['1'],
+                        eachLkRgxp: ['1']]
             }
         }
 
