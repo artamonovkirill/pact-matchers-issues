@@ -27,8 +27,6 @@ class NestedEqualsConsumerSpec extends Specification {
             withBody {
                 flag true
                 str '1'
-//                rawArray eachLike(1, equalTo('1'))
-//                regexpRawArray eachLike(1, regexp(~/.+/, '1'))
                 arr minLike(1, 1) {
                     flag true
                     str '1'
