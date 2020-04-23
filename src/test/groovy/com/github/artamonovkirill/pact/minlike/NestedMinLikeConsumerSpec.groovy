@@ -7,25 +7,24 @@ import spock.lang.Specification
 
 class NestedMinLikeConsumerSpec extends Specification {
 
-    public static PORT = 9000
-    public static PATH = '/nested-array'
-    public static BODY = [parent: [
+    static port = 9000
+    static path = '/nested-array'
+    static body = [parent: [
             [child: ['a']],
             [child: ['a']]]]
 
-    @SuppressWarnings('GrUnresolvedAccess')
     def 'Generate pact'() {
         given:
         def provider = new PactBuilder()
         provider {
             serviceConsumer 'NestedMinLikeConsumer'
             hasPactWith 'NestedMinLikeProvider'
-            port PORT
+            port NestedMinLikeConsumerSpec.port
 
             uponReceiving('request for nested array json')
             withAttributes(
                     method: 'get',
-                    path: PATH)
+                    path: path)
             willRespondWith(status: 200)
             withBody {
                 parent minLike(2, 2) {
@@ -37,20 +36,20 @@ class NestedMinLikeConsumerSpec extends Specification {
         when:
         def result = provider.runTest {
             given:
-            def client = new RESTClient("http://localhost:$PORT/")
+            def client = new RESTClient("http://localhost:$port/")
 
             when:
-            def response = client.get(path: PATH)
+            def response = client.get(path: path)
 
             then:
             with(response) {
                 status == 200
-                data == BODY
+                data == body
             }
         }
 
         then:
-        result == PactVerificationResult.Ok.INSTANCE
+        result instanceof PactVerificationResult.Ok
     }
 
 }

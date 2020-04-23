@@ -7,22 +7,21 @@ import spock.lang.Specification
 
 class NestedEqualsConsumerSpec extends Specification {
 
-    public static PORT = 9001
-    public static PATH = '/nested'
+    static port = 9001
+    static path = '/nested'
 
-    @SuppressWarnings('GrUnresolvedAccess')
     def 'Generate pact'() {
         given:
         def provider = new PactBuilder()
         provider {
             serviceConsumer 'NestedConsumer'
             hasPactWith 'NestedProvider'
-            port PORT
+            port NestedEqualsConsumerSpec.port
 
             uponReceiving('request for nested array json')
             withAttributes(
                     method: 'get',
-                    path: PATH)
+                    path: path)
             willRespondWith(status: 200)
             withBody {
                 flag true
@@ -37,10 +36,10 @@ class NestedEqualsConsumerSpec extends Specification {
         when:
         def result = provider.runTest {
             given:
-            def client = new RESTClient("http://localhost:$PORT/")
+            def client = new RESTClient("http://localhost:$port/")
 
             when:
-            def response = client.get(path: PATH)
+            def response = client.get(path: path)
 
             then:
             with(response) {
@@ -61,7 +60,7 @@ class NestedEqualsConsumerSpec extends Specification {
         }
 
         then:
-        result == PactVerificationResult.Ok.INSTANCE
+        result instanceof PactVerificationResult.Ok
     }
 
 }

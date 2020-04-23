@@ -1,0 +1,34 @@
+plugins {
+    id 'groovy'
+    id 'com.github.ben-manes.versions' version '0.28.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'au.com.dius:pact-jvm-consumer-groovy_2.12:3.6.14'
+    testImplementation 'au.com.dius:pact-jvm-provider-junit_2.12:3.6.14'
+
+    testImplementation 'org.spockframework:spock-core:2.0-M2-groovy-3.0'
+
+    testImplementation 'com.github.tomakehurst:wiremock:2.26.3'
+    testImplementation 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.2'
+}
+
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+}
+
+task providerTest(type: Test, dependsOn: test) {
+    include '**/*Test.*'
+    outputs.upToDateWhen { false }
+}
+
+build.finalizedBy providerTest
+
+wrapper {
+    gradleVersion = '6.3'
+}
