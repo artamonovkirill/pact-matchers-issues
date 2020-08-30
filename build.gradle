@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'au.com.dius:pact-jvm-consumer-groovy_2.12:3.6.14'
+    testImplementation 'au.com.dius:pact-jvm-consumer-groovy_2.12:3.6.15'
     testImplementation 'au.com.dius:pact-jvm-provider-junit_2.12:3.6.14'
 
     testImplementation 'org.spockframework:spock-core:2.0-M2-groovy-3.0'
