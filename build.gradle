@@ -26,9 +26,3 @@ task providerTest(type: Test, dependsOn: test) {
     include '**/*Test.*'
     outputs.upToDateWhen { false }
 }
-
-build.finalizedBy providerTest
-
-wrapper {
-    gradleVersion = '6.3'
-}
