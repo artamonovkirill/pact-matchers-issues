@@ -3,14 +3,18 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.29.0'
 }
 
+apply from: 'gradle/versions.gradle'
+
 repositories {
     jcenter()
 }
 
 dependencies {
-    testImplementation 'au.com.dius:pact-jvm-consumer-groovy_2.12:3.6.15'
-    testImplementation 'au.com.dius:pact-jvm-provider-junit_2.12:3.6.15'
+    testImplementation "au.com.dius:pact-jvm-consumer-groovy_2.12:$versions.pact"
+    testImplementation "au.com.dius:pact-jvm-provider-junit_2.12:$versions.pact"
 
+    testImplementation "org.codehaus.groovy:groovy:$versions.groovy"
+    testImplementation "org.codehaus.groovy:groovy-xml:$versions.groovy" // Pact needs groovy.util.slurpersupport.GPathResult
     testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
 
     testImplementation 'com.github.tomakehurst:wiremock:2.27.1'
@@ -20,9 +24,19 @@ dependencies {
 test {
     useJUnitPlatform()
     outputs.upToDateWhen { false }
+    testLogging {
+        showStandardStreams true
+        events 'FAILED'
+        exceptionFormat 'full'
+    }
 }
 
 task providerTest(type: Test, dependsOn: test) {
     include '**/*Test.*'
     outputs.upToDateWhen { false }
+    testLogging {
+        showStandardStreams true
+        events 'FAILED'
+        exceptionFormat 'full'
+    }
 }
