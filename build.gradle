@@ -17,7 +17,7 @@ dependencies {
     testImplementation "org.codehaus.groovy:groovy-xml:$versions.groovy" // Pact needs groovy.util.slurpersupport.GPathResult
     testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
 
-    testImplementation 'com.github.tomakehurst:wiremock:2.27.1'
+    testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
     testImplementation 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.2'
 }
 
