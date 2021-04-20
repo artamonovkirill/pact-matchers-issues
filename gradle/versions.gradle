@@ -1,4 +1,4 @@
 ext.versions = [
-        groovy: '3.0.7',
+        groovy: '3.0.8',
         pact  : '3.6.15'
 ]
